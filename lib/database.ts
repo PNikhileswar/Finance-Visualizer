@@ -25,6 +25,12 @@ let client: MongoClient | null = null
 let db: Db | null = null
 
 export async function connectToDatabase() {
+  // For now, skip MongoDB connection on Vercel to avoid SSL issues
+  if (process.env.VERCEL) {
+    console.log('Running on Vercel, using in-memory storage')
+    return { client: null, db: null }
+  }
+
   try {
     if (client && db) {
       return { client, db }
