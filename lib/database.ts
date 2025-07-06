@@ -30,8 +30,28 @@ export async function connectToDatabase() {
       return { client, db }
     }
 
-    client = new MongoClient(MONGODB_URI)
+    // MongoDB connection options optimized for Vercel and Atlas
+    const options = {
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 15000,
+      socketTimeoutMS: 45000,
+      connectTimeoutMS: 30000,
+      heartbeatFrequencyMS: 30000,
+      maxIdleTimeMS: 30000,
+      retryWrites: true,
+      tls: true,
+      tlsInsecure: false,
+      useUnifiedTopology: true,
+      family: 4, // Force IPv4
+      bufferMaxEntries: 0
+    }
+
+    client = new MongoClient(MONGODB_URI, options)
     await client.connect()
+    
+    // Test the connection
+    await client.db(MONGODB_DB).admin().ping()
+    
     db = client.db(MONGODB_DB)
     
     console.log('Connected to MongoDB')
