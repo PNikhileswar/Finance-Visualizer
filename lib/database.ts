@@ -5,8 +5,71 @@ const MONGODB_DB = process.env.MONGODB_DB || 'finance-tracker'
 
 // In-memory storage for development when MongoDB is not available
 let inMemoryData = {
-  transactions: [] as any[],
-  budgets: [] as any[],
+  transactions: [
+    {
+      _id: 'sample1',
+      amount: 45.50,
+      category: 'food',
+      description: 'Lunch at restaurant',
+      date: new Date().toISOString().split('T')[0],
+      type: 'expense'
+    },
+    {
+      _id: 'sample2',
+      amount: 25.00,
+      category: 'transport',
+      description: 'Bus fare',
+      date: new Date(Date.now() - 86400000).toISOString().split('T')[0], // Yesterday
+      type: 'expense'
+    },
+    {
+      _id: 'sample3',
+      amount: 120.00,
+      category: 'entertainment',
+      description: 'Movie tickets',
+      date: new Date(Date.now() - 172800000).toISOString().split('T')[0], // 2 days ago
+      type: 'expense'
+    },
+    {
+      _id: 'sample4',
+      amount: 2500.00,
+      category: 'salary',
+      description: 'Monthly salary',
+      date: new Date().toISOString().split('T')[0],
+      type: 'income'
+    },
+    {
+      _id: 'sample5',
+      amount: 80.00,
+      category: 'shopping',
+      description: 'Groceries',
+      date: new Date(Date.now() - 259200000).toISOString().split('T')[0], // 3 days ago
+      type: 'expense'
+    }
+  ] as any[],
+  budgets: [
+    {
+      _id: 'budget1',
+      category: 'food',
+      amount: 300,
+      month: new Date().getMonth(),
+      year: new Date().getFullYear()
+    },
+    {
+      _id: 'budget2',
+      category: 'transport',
+      amount: 100,
+      month: new Date().getMonth(),
+      year: new Date().getFullYear()
+    },
+    {
+      _id: 'budget3',
+      category: 'entertainment',
+      amount: 200,
+      month: new Date().getMonth(),
+      year: new Date().getFullYear()
+    }
+  ] as any[],
   categories: [
     { _id: 'food', name: 'Food & Dining', color: '#ef4444', type: 'expense' },
     { _id: 'transport', name: 'Transportation', color: '#f97316', type: 'expense' },
