@@ -1,0 +1,7 @@
+{
+  "/page": "app/page.js",
+  "/api/transactions/route": "app/api/transactions/route.js",
+  "/api/analytics/monthly/route": "app/api/analytics/monthly/route.js",
+  "/api/analytics/categories/route": "app/api/analytics/categories/route.js",
+  "/api/analytics/budget-comparison/route": "app/api/analytics/budget-comparison/route.js"
+}
